@@ -2,7 +2,8 @@
 // 自己網站的檔案：先用快取（可離線），同時在背景抓新版，下次打開就是新版。
 // Google 字型：第一次連網時存起來，之後離線也能用。
 // 新增學期或改版時：把新路徑加進 CORE，並更新 VERSION。
-const VERSION = 'math-adventure-v2';
+// 注意：同網域（cchouse168.github.io）的其他遊戲共用快取空間，這裡只清除自己（math-adventure-）的舊快取。
+const VERSION = 'math-adventure-v3';
 const CORE = [
   "./",
   "./index.html",
@@ -22,7 +23,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
+    caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('math-adventure-') && k !== VERSION).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
