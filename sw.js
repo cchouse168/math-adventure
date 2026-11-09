@@ -3,7 +3,7 @@
 // Google 字型：第一次連網時存起來，之後離線也能用。
 // 新增學期或改版時：把新路徑加進 CORE，並更新 VERSION。
 // 注意：同網域（cchouse168.github.io）的其他遊戲共用快取空間，這裡只清除自己（math-adventure-）的舊快取。
-const VERSION = 'math-adventure-v3';
+const VERSION = 'math-adventure-v5';
 const CORE = [
   "./",
   "./index.html",
