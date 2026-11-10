@@ -9,8 +9,8 @@
 | 學期 | 網址 | 狀態 |
 |---|---|---|
 | 三上 | https://cchouse168.github.io/math-adventure/g3a/ | ✅ 可以玩 |
+| 三下 | https://cchouse168.github.io/math-adventure/g3b/ | ✅ 可以玩（康軒版） |
 | 六上 | https://cchouse168.github.io/math-adventure/g6a/ | ✅ 可以玩（康軒版） |
-| 三下 | `g3b/` | 🔜 即將推出 |
 | 四上 | `g4a/` | 🔜 即將推出 |
 | 四下 | `g4b/` | 🔜 即將推出 |
 
@@ -34,6 +34,7 @@ manifest.json     PWA 設定（site.webmanifest 同內容）
 sw.js             離線快取（整站共用）
 icon/             App 圖示
 g3a/index.html    三上（gXa = X 年級上學期、gXb = 下學期）
+g3b/index.html    三下（康軒版）
 g6a/index.html    六上（康軒版）
 ```
 
