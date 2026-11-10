@@ -1100,8 +1100,17 @@ const daysOfWeek = w => new Set(gs.log.filter(x => x.w === w).map(x => x.d)).siz
 
 /* ---------- sound & fx ---------- */
 let AC = null;
-function tone(seq){ if (gs.mute) return; try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); let t = AC.currentTime;
-  seq.forEach(([f, d, type = "sine"]) => { const o = AC.createOscillator(), g = AC.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t + d); o.connect(g).connect(AC.destination); o.start(t); o.stop(t + d); t += d * .8; }); } catch(e){} }
+// 音效：iPad 朗讀後播放器會變成「中斷」、Chrome 在非點擊時建立會是「暫停」，都要在下一次點擊時恢復
+function audioCtx(){ try { if (!AC || AC.state === "closed") AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ AC = null; } return AC; }
+function unlockAudio(){ const ac = audioCtx(); if (ac && ac.state !== "running") { const p = ac.resume(); if (p && p.catch) p.catch(() => {}); } }
+["pointerdown", "touchend", "keydown"].forEach(ev => addEventListener(ev, unlockAudio, { passive: true, capture: true }));
+document.addEventListener("visibilitychange", () => { if (!document.hidden) unlockAudio(); });
+function playSeq(ac, seq){ let t = ac.currentTime + .01;
+  seq.forEach(([f, d, type = "sine"]) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t + d); o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d); t += d * .8; }); }
+function tone(seq){ if (gs.mute) return; try { const ac = audioCtx(); if (!ac) return;
+  if (ac.state === "running") return playSeq(ac, seq);
+  const p = ac.resume(); const later = () => { if (ac.state === "running") playSeq(ac, seq); else if (ac.state === "interrupted" || ac.state === "suspended") { try { ac.close(); } catch(e){} AC = null; const ac2 = audioCtx(); if (ac2) { const p2 = ac2.resume(); (p2 && p2.then ? p2 : Promise.resolve()).then(() => { if (ac2.state === "running") playSeq(ac2, seq); }).catch(() => {}); } } };
+  (p && p.then ? p : Promise.resolve()).then(later).catch(later); } catch(e){} }
 const SFX = { ok: () => tone([[660,.12],[880,.18]]), bad: () => tone([[220,.2,"square"],[180,.25,"square"]]), hit: () => tone([[120,.08,"sawtooth"],[90,.12,"sawtooth"]]), win: () => tone([[523,.15],[659,.15],[784,.15],[1047,.35]]), coin: () => tone([[988,.08],[1319,.15]]) };
 function confetti(){
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
