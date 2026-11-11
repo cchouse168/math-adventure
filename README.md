@@ -11,6 +11,7 @@
 | 三上 | https://cchouse168.github.io/math-adventure/g3a/ | ✅ 可以玩 |
 | 三下 | https://cchouse168.github.io/math-adventure/g3b/ | ✅ 可以玩（康軒版） |
 | 六上 | https://cchouse168.github.io/math-adventure/g6a/ | ✅ 可以玩（康軒版） |
+| 六下 | https://cchouse168.github.io/math-adventure/g6b/ | ✅ 可以玩（康軒版） |
 | 四上 | `g4a/` | 🔜 即將推出 |
 | 四下 | `g4b/` | 🔜 即將推出 |
 
@@ -36,6 +37,7 @@ icon/             App 圖示
 g3a/index.html    三上（gXa = X 年級上學期、gXb = 下學期）
 g3b/index.html    三下（康軒版）
 g6a/index.html    六上（康軒版）
+g6b/index.html    六下（康軒版）
 ```
 
 新增學期：建立 `g3b/index.html`，在首頁把該學期設為可玩，並把路徑加進 `sw.js` 的 `CORE` 清單、更新 `VERSION`。每個學期的進度存在 `localStorage` 的 `math-adventure:<學期代碼>:v2`。

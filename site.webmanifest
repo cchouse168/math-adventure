@@ -111,6 +111,18 @@
           "type": "image/png"
         }
       ]
+    },
+    {
+      "name": "六下 · 數學自學冒險",
+      "short_name": "六下",
+      "url": "./g6b/",
+      "icons": [
+        {
+          "src": "icon/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
