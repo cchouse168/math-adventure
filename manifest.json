@@ -101,6 +101,30 @@
       ]
     },
     {
+      "name": "四上 · 數學自學冒險",
+      "short_name": "四上",
+      "url": "./g4a/",
+      "icons": [
+        {
+          "src": "icon/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "四下 · 數學自學冒險",
+      "short_name": "四下",
+      "url": "./g4b/",
+      "icons": [
+        {
+          "src": "icon/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
       "name": "六上 · 數學自學冒險",
       "short_name": "六上",
       "url": "./g6a/",
